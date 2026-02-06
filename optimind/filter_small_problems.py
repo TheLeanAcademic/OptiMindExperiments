@@ -1,56 +1,33 @@
-#!/usr/bin/env python3
-"""
-Filter datasets to small problems suitable for free Gurobi license.
-The free license has limits on problem size (variables/constraints).
-"""
-
 import pandas as pd
 import argparse
-import os
 
-def filter_dataset(input_path, output_path, n_problems=10):
+def filter_small_problems(input_file, output_file, num_problems=10):
     """
-    Filter dataset to first N problems for testing with free Gurobi license.
-    
-    Args:
-        input_path: Path to input CSV file
-        output_path: Path to output CSV file
-        n_problems: Number of problems to include (default: 10)
+    Filter dataset to include only a small number of problems.
+    This is useful for testing with free Gurobi license and API-based LLMs.
     """
-    print(f"Reading dataset from: {input_path}")
-    df = pd.read_csv(input_path)
+    print(f"Reading dataset from {input_file}...")
+    df = pd.read_csv(input_file)
     
-    print(f"Original dataset size: {len(df)} problems")
+    print(f"Total problems in dataset: {len(df)}")
     
     # Filter to first N problems
-    df_small = df.head(n_problems)
+    df_small = df.head(num_problems)
     
     # Save filtered dataset
-    df_small.to_csv(output_path, index=False)
+    df_small.to_csv(output_file, index=False)
     
-    print(f"Filtered dataset saved to: {output_path}")
-    print(f"New dataset size: {len(df_small)} problems")
-    print("\nColumn names:", df_small.columns.tolist())
-    print("\nFirst problem preview:")
-    if 'question' in df_small.columns:
-        print(df_small['question'].iloc[0][:200] + "...")
+    print(f"✓ Created filtered dataset with {len(df_small)} problems")
+    print(f"✓ Saved to: {output_file}")
+    
+    return len(df_small)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Filter optimization datasets to small problems")
+    parser = argparse.ArgumentParser(description="Filter dataset to small number of problems")
     parser.add_argument("--input", type=str, required=True, help="Input CSV file path")
     parser.add_argument("--output", type=str, required=True, help="Output CSV file path")
-    parser.add_argument("--n", type=int, default=10, help="Number of problems to include (default: 10)")
+    parser.add_argument("--num", type=int, default=10, help="Number of problems to keep (default: 10)")
     
     args = parser.parse_args()
     
-    # Check if input file exists
-    if not os.path.exists(args.input):
-        print(f"Error: Input file not found: {args.input}")
-        print("\nAvailable datasets in data/ directory:")
-        if os.path.exists("data"):
-            for f in os.listdir("data"):
-                if f.endswith(".csv"):
-                    print(f"  - data/{{f}}")
-        exit(1)
-    
-    filter_dataset(args.input, args.output, args.n)
+    filter_small_problems(args.input, args.output, args.num)
