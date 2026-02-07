@@ -1,0 +1,12 @@
+# Requirements for API-based evaluation
+
+This file lists the minimal dependencies required for API-based evaluation without GPU requirements.
+
+## Dependencies
+
+- requests
+- Flask
+- numpy
+- pandas
+
+Ensure that these packages are installed in your Python environment for smooth operation of the API-based evaluation setup.
