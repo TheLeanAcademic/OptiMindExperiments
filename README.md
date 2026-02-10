@@ -1,81 +1,90 @@
-# OptiGuide: GenAI for Optimization and Decision Intelligence
+# OptiMind Data Explorer
 
+A simple web application to explore the Operations Research problems dataset.
 
-## Projects
+## Features
 
-We have several projects in this repository for decision making and optimization, and please cite the paper if you use this code in your own work.
+- 📊 **Interactive Data Table**: Browse through all problems in the dataset
+- 🔍 **Search Functionality**: Search through questions and answers
+- 🏷️ **Filter by Class**: Filter problems by their classification
+- 📈 **Statistics Dashboard**: View key metrics about the dataset
+- 🎨 **Modern UI**: Clean, responsive design
 
+## How to Use
 
-### OptiGuide for Supply Chain Optimization with What-if Analysis
-The [what-if](what-if/) folder includes the following material to open source the paper and what-if analysis for the OptiGuide project:
+### Option 1: GitHub Pages (Recommended)
 
-```latex
-@article{li2023large,
-  title={Large Language Models for Supply Chain Optimization},
-  author={Li, Beibin and Mellou, Konstantina and Zhang, Bo and Pathuri, Jeevan and Menache, Ishai},
-  journal={arXiv preprint arXiv:2307.03875},
-  year={2023}
-}
-```
+1. Go to your repository settings
+2. Navigate to "Pages" section
+3. Under "Source", select the `data_explorer_app` branch
+4. Select `/` (root) as the folder
+5. Click "Save"
+6. Your app will be available at: `https://theleanacademic.github.io/OptiMindExperiments/`
 
-### Towards Foundation Models for Mixed Integer Linear Programming
-The [milp-evolve](milp-evolve/) folder includes the following material to open source the paper, MILP-Evolve code, and data:
+### Option 2: Local Development
 
-```latex
-@article{li2024towards,
-  author    = {Li, Sirui and Kulkarni, Janardhan and Wu, Cathy and Menache, Ishai and Li, Beibin},
-  title     = {Towards Foundation Models for Mixed Integer Linear Programming},
-  booktitle = {The Thirteenth International Conference on Learning Representations},
-  year      = {2025}
-}
-```
+1. Clone the repository and checkout the branch:
+   ```bash
+   git clone https://github.com/TheLeanAcademic/OptiMindExperiments.git
+   cd OptiMindExperiments
+   git checkout data_explorer_app
+   ```
 
-### OptiMind: Teaching LLMs to Think Like Optimization Experts
-The [optimind](optimind/) folder includes the following material to open source the paper, evaluation code, and test data for the OptiMind project: 
+2. Start a local web server. You can use Python:
+   ```bash
+   # Python 3
+   python -m http.server 8000
+   
+   # Python 2
+   python -m SimpleHTTPServer 8000
+   ```
 
-```
-@article{zhang2025optimind,
-  title={OptiMind: Teaching LLMs to Think Like Optimization Experts},
-  author={Zhang, Xinzhi and Chen, Zeyi and Zope, Humishka and Barbalho, Hugo and Mellou, Konstantina and Molinaro, Marco and Kulkarni, Janardhan and Menache, Ishai and Li, Sirui},
-  journal={arXiv preprint arXiv:2509.22979},
-  year={2025}
-}
-```
+3. Open your browser and navigate to `http://localhost:8000`
 
+## Files
 
-## Responsible AI Considerations  
+- `index.html` - Main HTML structure
+- `app.js` - JavaScript functionality for data loading and filtering
+- `README.md` - This file
 
-The integration of GenAI into decision intelligence and optimization has provided human-like reasoning in complex problem-solving. However, it is essential to actively consider the ethical and responsible aspects of AI to ensure its application remains both beneficial and free from unintended consequences.  
+## Data Source
 
-Since we utilize publicly available language models, our framework inherently inherits both the strengths and limitations of these models. Recognizing these challenges, we have implemented safeguard mechanisms to ensure fairness, robustness, and safety in decision-making. Nevertheless, due to the inherent complexities of AI, issues such as model biases, adversarial vulnerabilities, and unexpected behaviors can still arise.  
+The app loads data from:
+`optimind/data/optimind_cleaned_classified_industryor.csv`
 
-Researchers and practitioners must critically assess and interpret these AI-driven solutions, maintaining a deep understanding of both the advantages and limitations of LLMs. By responsibly leveraging these models, we can drive significant advancements in decision intelligence and optimization while upholding ethical standards and mitigating potential risks.
+## Features Breakdown
 
-## Prohibitions
-Due to the specialized nature of this repository, which includes both benchmark data and source code designed for evaluating data-oriented models and pipelines, we expressly prohibit the following:
+### Search
+Type any text in the search box to filter problems by:
+- Question content
+- Answer values
+- Problem classifications
 
-1. Scraping the content of this repository for the purpose of training machine learning models, deep learning architectures, data science algorithms, large language models, or any other data-driven computational models.  Utilizing this repository's content for such purposes could introduce bias and invalidate the evaluation metrics of the trained models. You are, however, permitted to use this repository for the evaluation of models and pipelines.
-2. Violating the licensing terms in this repository.
+### Filter by Class
+Use the dropdown to filter by specific problem types such as:
+- Production Planning Problem
+- Knapsack
+- Transportation Problem
+- And many more...
 
+### Statistics
+View real-time statistics:
+- Total number of problems
+- Number of unique problem classes
+- Number of currently visible problems (after filtering)
 
-## Contributing
+## Browser Compatibility
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+This app works in all modern browsers:
+- Chrome/Edge (recommended)
+- Firefox
+- Safari
 
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
+## Future Enhancements
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
-## Trademarks
-
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft
-trademarks or logos is subject to and must follow
-[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
-Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
-Any use of third-party trademarks or logos are subject to those third-party's policies.
+Potential features for future versions:
+- Export filtered data to CSV
+- Advanced filtering (by answer range, multiple classes)
+- Detailed problem view with full text
+- Data visualization charts
+- Sort by column
