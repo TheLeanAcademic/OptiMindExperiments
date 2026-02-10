@@ -2,6 +2,29 @@
 let allData = [];
 let filteredData = [];
 
+// Global error handlers to surface issues on mobile
+function showErrorOnPage(error) {
+    const loadingEl = document.getElementById('loading');
+    if (!loadingEl) return;
+    const message = error?.message || error?.toString?.() || String(error);
+    loadingEl.style.display = 'block';
+    loadingEl.innerHTML = `
+        <div style="color: #dc3545;">
+            <strong>Error</strong><br>
+            ${message}<br>
+            <small>Please try reloading the page.</small>
+        </div>
+    `;
+}
+
+window.addEventListener('error', (event) => {
+    showErrorOnPage(event.error || event.message);
+});
+
+window.addEventListener('unhandledrejection', (event) => {
+    showErrorOnPage(event.reason);
+});
+
 // CSV URL from GitHub
 const CSV_URL = 'https://raw.githubusercontent.com/TheLeanAcademic/OptiMindExperiments/main/optimind/data/optimind_cleaned_classified_industryor.csv';
 
