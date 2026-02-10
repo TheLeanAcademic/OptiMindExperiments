@@ -25,6 +25,9 @@ function parseCSV(csvText) {
                 row[header] = values[index];
             });
             data.push(row);
+        } else if (values.length > 1) {
+            // Log warning for rows with mismatched column counts
+            console.warn(`Row ${i + 1} has ${values.length} columns, expected ${headers.length}`);
         }
     }
     
@@ -86,7 +89,7 @@ async function loadData() {
         const response = await fetch(CSV_URL);
         
         if (!response.ok) {
-            throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
+            throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}. Please check your network connection and verify the CSV file exists.`);
         }
         
         const csvText = await response.text();
